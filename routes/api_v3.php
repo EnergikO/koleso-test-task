@@ -16,5 +16,7 @@ use App\Http\Controllers\Api\v3;
 |
 */
 
-Route::get("/cities", [v3\WatherapiController::class, "getWeatherByCityId"]);
-Route::get("/cities/{city_id}", [v3\WatherapiController::class, "getWeatherAllCities"]);
+Route::get("/cities", [v3\WatherapiController::class, "getWeatherAllCities"]);
+Route::get("/cities/{city_id}", [v3\WatherapiController::class, "getWeatherByCityId"]);
+
+Route::get("/cities/update/{city_name}", [v3\WatherapiController::class, "getWeatherForApiByCityName"]);

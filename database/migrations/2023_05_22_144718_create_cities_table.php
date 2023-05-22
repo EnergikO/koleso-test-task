@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('weather');
+            $table->string('name')->unique();
+            $table->string('weather_today');
+            $table->string('weather_tomorrow');
             $table->dateTime('weather_updated_at');
             $table->timestamps();
         });
