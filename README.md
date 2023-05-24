@@ -1,66 +1,49 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Задача:
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Кандидат должен написать приложение которое:
+берет имя города как параметр
+для этого города берет данные о погоде на следующие 2 дня используя http://api.weatherapi.com и выводит в STDOUT
+- `Processed city [city name] | [weather today] - [weather tomorrow]`
 
-## About Laravel
+Example:
+- `Processed city Milan | Heavy rain - Partly cloudy`
+- `Processed city Naples | Sunny - Sunny`
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Теперь, когда мы имеет сервис который дает нам данные о погоде на два дня, нам надо сохранять эти данные по API. Эндпойнта для получении информации о погоде для города у нас не существует, мы имеем только 2 эндпойнта для получении информации о городах/городе
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. GET /api/v3/cities
+2. GET /api/v3/cities/{id}
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Пожалуйста предоставьте следующие эндпойнты:
+- эндпойнт/ы для сохранения погоды для конкретного города
+- эндпойнт/ы для чтения информации о погоде для конкретного города
 
-## Learning Laravel
+Будьте уверены что они отвечают на следующие вопросы:
+- Какая погода в городе [city] сегодня ?
+- Какая погода в городе [city] завтра?
+- Какая погода в городе [city] в день [day] ?
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Для каждого эндпойнта пожалуйста предоставьте информацию о: эндпойнте, посылаемых данных, возможном ответе и опишите поведение
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Необходимые требования
+- Используйте PHP 8.X
+- Обязательно Unit тесты
+- Должен иметь полезный README со всей информацией по проекту
+- Должен соответствовать код стандарту
+- Проект должен содержать чистую GIT историю, что бы люди могли понимать как развивался проект
+- Код должен быть покрыт тестами, чтобы при изменение кода не приводила с багам
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Описание проекта:
+В пректе используются три запроса API:
+- `api/v3/cities/`
+- `api/v3/cities/{id:int}`
+- `api/v3/cities/update/{city_name:string}?save:boolean`
 
-## Laravel Sponsors
+## Формат ответа сервера:
+Сервер отвечает в JSON формате.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Сервер всегда отправляет ключ `status`, который принимает 2 значения:
+- `success` - Запрос успешно выполен
+- `error` - Что-то пошло нет. При это возвращается `message` с описанием ошибки
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Если в запросе `api/v3/cities/update/{city_name:string}?save:boolean` указать `save` как `true`, то данные сохранятся на сервер, после чего их можно будет просто запросить, используя первые два запроса
