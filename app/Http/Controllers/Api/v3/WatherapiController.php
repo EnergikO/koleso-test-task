@@ -20,7 +20,7 @@ class WatherapiController extends Controller
         ], 200);
     }
 
-    public static function getWeatherByCityId(Request $request, Int $cityId)
+    public static function getWeatherByCityId(Request $request, $cityId)
     {
         $city = City::find($cityId);
 
