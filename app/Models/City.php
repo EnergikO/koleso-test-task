@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
+use Exception;
 
 class City extends Model
 {
@@ -23,7 +24,7 @@ class City extends Model
         $response = Http::get("http://api.weatherapi.com/v1/forecast.json?key={$token}&q={$cityName}}&days=2&aqi=no&alerts=no");
 
         if ($response->getStatusCode() != 200) {
-            return false;
+            throw new Exception;
         }
 
         $response = json_decode($response, TRUE);

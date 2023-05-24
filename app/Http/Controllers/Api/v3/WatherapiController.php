@@ -39,9 +39,9 @@ class WatherapiController extends Controller
 
     public static function getWeatherForApiByCityName(Request $request, string $cityName)
     {
-        $result = City::getWeatherByApi($cityName, $request->get('save', false));
-
-        if (! $result) {
+        try {
+            $result = City::getWeatherByApi($cityName, $request->get('save', false));
+        } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Something went wrong. Make sure you send the correct name for the city',
